@@ -1,7 +1,4 @@
 <?php
-  $db = new PDO("sqlite:R:/root/phplite/reversegalgjeWOORDENVRAGEN.sqlite");
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $sql = 'SELECT woord FROM woorden';
     $woordenLijst = $db->query($sql);
     $id = 1;

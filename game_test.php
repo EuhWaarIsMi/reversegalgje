@@ -1,3 +1,6 @@
+<?php 
+	require "init.php";
+?>
 <!doctype html>
 <html>
 <head>
@@ -10,7 +13,7 @@
 		// hier komt vraag functie te staan
 		echo "<h1>ben je gay?</h1>";
 
-		$beurten = 10;
+		
 		if(isset($_POST['antwoord'])) {
 			echo $_POST['antwoord'];
 			$beurten--;
@@ -19,7 +22,7 @@
 		if(isset($_POST['zetTerug'])) {
 			echo $_POST['zetTerug'];
 		}
-		echo "<br>".$beurten;
+		
 	?>
 
 	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
@@ -27,5 +30,9 @@
 		<input type="submit" name="antwoord" value="nee"></input>
 		<input type="submit" name="zetTerug" value="ga een zet terug"></input>
 	</form>
+
+	<?php
+		KansBerekening($sessie, $kansSessie, $db);
+	?>
 </body>
 </html>
