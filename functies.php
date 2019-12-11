@@ -13,7 +13,7 @@
 				$sql = "UPDATE ". $kansSessie. " SET aantal = (SELECT COUNT(*) FROM woorden WHERE (woord LIKE '".str_repeat("_",$i-1).$letter."%')AND (id IN (SELECT id FROM ".$sessie. " WHERE weg = 'False'))) WHERE vraag = '".$letter.$i."'";
 							// echo $sql."<br>";
 							$db->query($sql);
-			}
+			}	
 		}
 
 		foreach(range('a','z') as $letter){
@@ -27,7 +27,7 @@
 		$db->query($sql);
 	}
 
-
+	
 	function KiesVraag($sessie, $kansSessie, $db){
 		$minPerc = 50;
 		$maxPerc = 50;
@@ -35,15 +35,20 @@
 		do {
 			$maxPerc += 10;
 			$minPerc -= 10;
-			
+
+			//zet query getal om in int
+			$aantalInPercQuery = $db->query("SELECT COUNT(*) FROM ". $kansSessie ." WHERE percentage >= ". $minPerc. " AND percentage <= ". $maxPerc);
+			$aantalInPerc_row = $aantalInPercQuery->fetch(PDO::FETCH_ASSOC);
+			$aantalInPerc = $aantalInPerc_row['COUNT(*)'];
+
 			$sql = "SELECT vraag FROM ". $kansSessie. " WHERE percentage >= ". $minPerc. " AND percentage <=". $maxPerc ." ORDER BY RANDOM() LIMIT 1 ";
 			$vraag = $db->query($sql);
 			foreach ($vraag as $row) {
-				echo $row['vraag'];
+				echo $row['vraag']. "<br>";
 			}
-			//fix die while loop plz
-//			echo $vraag;
-		} while(false);
+
+			//het werkt nu, alleen nog ff bepalen uit hoeveel hij kan kiezen
+		} while($aantalInPerc < 5);
 	}
 
 ?>
