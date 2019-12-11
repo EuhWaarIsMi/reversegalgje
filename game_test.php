@@ -33,6 +33,7 @@
 
 	<?php
 		KansBerekening($sessie, $kansSessie, $db);
+		KiesVraag($sessie, $kansSessie, $db);
 	?>
 </body>
 </html>
