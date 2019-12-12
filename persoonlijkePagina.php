@@ -13,7 +13,7 @@
 <body>
 Succes!
 <?php
-	echo $_SESSION['gebruiker'];
+	// echo $_SESSION['gebruiker'];
 	echo session_id();
 ?>
 <a href="index.php">Home</a>
