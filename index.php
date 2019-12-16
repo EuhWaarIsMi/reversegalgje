@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" >
     <title>Reversegalgje</title>  
   </head>
-  <body>	
+  <body>
     <header>
       <nav class="main">
         <?php
@@ -27,6 +27,25 @@
       </nav>
     </header>
 
+	<script>
+      $("#notify-button").click(function(){
+        Push.create("Hello world!",{
+            body: "This is example of Push.js Tutorial",
+            icon: '/Logo_small.png',
+            timeout: 2000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
+      });
+      $("#clear-button").click(function(){ 
+           Push.clear();
+      });
+      $("#check-button").click(function(){ 
+            console.log(Push.Permission.has());
+      });
+  	</script>
     <section>
       <div>
         <h1>Reversegalgje</h1>

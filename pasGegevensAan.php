@@ -1,6 +1,8 @@
 <?php
-	require 'core/init.php';
+	include 'core/init.php';
+	session_start();
 ?>
+
 
 <!doctype html>
 <html>
@@ -49,12 +51,15 @@
 		}  
 		  
 		?>
-        <form name="aanmelden" method="post" action="aanmeldencode.php">
-		<input type="text" name="uid" placeholder="Gebruikersnaam">
-		<input type="password" name="ww" placeholder="Wachtwoord">
-		<input type="password" name="wwh" placeholder="Herhaal wachtwoord">
-		<input type="text" name="mail" placeholder="E-mail">
+        <form name="pasGegevensAan" method="post" action="pasGegevensAanCode.php">
+		<input type="text" name="ww" placeholder="Wachtwoord" value="<?php echo $_SESSION['mail'];?>">
+		<input type="text" name="mail" placeholder="E-mail" value="<?php echo $_SESSION['mail'];?>">
 		<p>Welke mode wil je?</p>
+		<select name="dlm">
+			<option value="dark">Dark mode</option>
+			<option value="light">Light mode</option>
+		</select>
+		<input type="file" name="file">
         <div>
           <input class="geel" type="submit" name="submit" value="Start">
         </div>
