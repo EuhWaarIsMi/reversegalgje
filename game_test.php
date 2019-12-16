@@ -1,7 +1,10 @@
 <?php
 	require "init.php";
-	require "variables.php"
-	$beurten
+	require "variables.php";
+	if(isset($_GET['beurten'])) {
+		$beurten = $_GET['beurten']; 
+	}
+	//$beurten = $_GET['beurten'];
 ?>
 <!doctype html>
 <html>
@@ -19,20 +22,23 @@
 	<?php
 		// hier komt vraag functie te staan
 		echo "<h1>$vraagVolledig</h1>";
+		
 
-
-		if(isset($_POST['antwoord'])) {
-			echo $_POST['antwoord'];
+		if(isset($_GET['antwoord'])) {
+			//echo $beurten;
+			//echo $_GET['antwoord'];
 			$beurten--;
 		}
 
-		if(isset($_POST['zetTerug'])) {
-			echo $_POST['zetTerug'];
+		if(isset($_GET['zetTerug'])) {
+			echo $_GET['zetTerug'];
+			$beurten++;
 		}
 		echo $beurten;
 	?>
 
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
+		<input type="hidden" name="beurten" value="<?php echo $beurten ?>"></input>
 		<input type="submit" name="antwoord" value="ja"></input>
 		<input type="submit" name="antwoord" value="nee"></input>
 		<input type="submit" name="zetTerug" value="ga een zet terug"></input>
