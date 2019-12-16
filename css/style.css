@@ -13,6 +13,11 @@ body {
 h1 {
   font-weight: 300;
   font-size: 48px;
+
+}
+
+.midden {
+  text-align: center;
 }
 
 h3 {
@@ -31,6 +36,7 @@ a {
 .nietGeel {
   display: inline-block;
   padding: .5em 1em;
+	cursor: pointer;
 }
 
 .geel {
@@ -42,6 +48,8 @@ a {
   color: #343233;
   background-color: #ffd152;
   transition: ease-in-out 0.5s;
+	margin: 0px 0px 0px 0px;
+	cursor: pointer;
 }
 
 .geel:hover{
@@ -85,15 +93,14 @@ img {
 }
 
 input[type=text], input[type=password], select{
-	width: 80%;
-	aria-hidden: true;
+	width: 100%;
 	display: block;
 	color: inherit;
 	margin: 10px 0px;
 	padding: 10px 10px;
 	background-color: inherit;
 	font-family: inherit;
-	border-radius: 25px;
+	border-radius: 5px;
 	border: 0.5px solid #EFDAB9;
 	transition: ease-in-out 0.5s;
 }
@@ -107,10 +114,15 @@ input:focus, select:focus{
 	outline: none;
 }
 
-input[type=submit]{
+input[type=submit], input[type-submit]{
 	border: none;
 	font-family: inherit;
 	font-size: inherit;
+	cursor: pointer;
+}
+
+#honderd {
+	width: 100%;
 }
 
 select {
@@ -124,14 +136,142 @@ option {
 	padding: 10px 10px;
 }
 
-.sidenav {
-	color: green;
+#groter {
+  text-align: right;
+  min-height: 10vh;
+  margin: 10px;
 }
 
-.sidenav a {
-	padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
+h2 {
+  font-weight: 300;
+  font-size: 24px;
+  border: none;
+  border-bottom: 0.5px solid #EFDAB9;
+  margin: 10px 0px;
+  width: 150%;
+  padding: 5px;
+}
+
+.speciaalGeel {
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  padding: .5em 1em;
+  border-radius: 5px;
+  color: #343233;
+  background-color: #ffd152;
+  transition: ease-in-out 0.5s;
+  margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.speciaalGeel:hover{
+  background-color: #61efce;
+  transition: ease-in-out 0.5s;
+	
+}
+
+#img2 {
+  padding: 0px;
+  height: 70vh;
+  width: auto;
+  margin: 0px 10vh;
+  filter: brightness(0.75) contrast(1) sepia(0.7) hue-rotate(-5deg) saturate(3.5);
+  border-radius: 25px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+  transition: ease-in-out 2s;
+}
+
+#img2:hover{
+  filter: none;
+  box-shadow: none;
+  transition: ease-in-out 2s;
+}
+
+#aanpas{
+  color: #61efce;
+  margin: 0px 5px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: inherit;
+    font-weight: 300;
+    color: #343233;
+	min-width: 100px;
+    background-color: #ffd152;
+    display: inline-block;
+	margin-bottom: 30px;
+	cursor: pointer;
+	padding: .5em 1em;
+	transition: ease-in-out 0.5s;
+	border-radius: 5px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #61efce;
+	transition: ease-in-out 0.5s;
+}
+
+p {
+	text-align: left;
+}
+
+.facebook {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: .5em 1em;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #4267b2;
+  transition: ease-in-out 0.5s;
+  margin: 10px 0px 0px 0px;
+  cursor: pointer;
+}
+.google {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: .5em 1em;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #4285f4;
+  transition: ease-in-out 0.5s;
+  margin: 15px 0px 5px 0px;
+  cursor: pointer;
+}
+
+.of {
+	margin-top: 10px;
+	text-align: center;
+}
+
+input.quiz {
+	width: 25%;
+	color: #fff;
+	background-color: #4285f4;
+}
+
+input.quiz:nth-child(1) {
+	float: left;
+	
+}
+
+input.quiz:nth-child(2) {
+	float: right;
+}
+
+input.quiz:nth-child(3) {
+	width: 70%;
+	margin-left: 15%;
 }
