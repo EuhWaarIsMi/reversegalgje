@@ -1,5 +1,7 @@
 <?php
 	require "init.php";
+	require "variables.php"
+	$beurten
 ?>
 <!doctype html>
 <html>
@@ -27,6 +29,7 @@
 		if(isset($_POST['zetTerug'])) {
 			echo $_POST['zetTerug'];
 		}
+		echo $beurten;
 	?>
 
 	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">

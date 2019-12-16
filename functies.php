@@ -3,13 +3,11 @@
 		for($i = 1; $i <= 17; $i++) {
 			//aantal letters
 			$sql = "UPDATE ". $kansSessie. " SET aantal = (SELECT COUNT(*) FROM woorden WHERE (aantalLetters = " .$i.") AND (id IN (SELECT id FROM ".$sessie. " WHERE weg = 'False'))) WHERE vraag = ". $i;
-			// $db->query($sql);
-			// echo $sql. "<br>";
+			 $db->query($sql);
 			foreach(range('a','b') as $letter){
 				//a1, b1, ... , a2, etc.
 				$sql = "UPDATE ". $kansSessie. " SET aantal = (SELECT COUNT(*) FROM woorden WHERE (woord LIKE '".str_repeat("_",$i-1).$letter."%')AND (id IN (SELECT id FROM ".$sessie. " WHERE weg = 'False'))) WHERE vraag = '".$letter.$i."'";
-							// echo $sql."<br>";
-							// $db->query($sql);
+							 $db->query($sql);
 			}
 		}
 		foreach(range('a','z') as $letter){
