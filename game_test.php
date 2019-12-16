@@ -25,8 +25,7 @@
 		
 
 		if(isset($_GET['antwoord'])) {
-			//echo $beurten;
-			//echo $_GET['antwoord'];
+			StreepVragenWeg($db, $_GET['antwoord'], $vraag, $sessie);
 			$beurten--;
 		}
 
