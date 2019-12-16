@@ -8,7 +8,7 @@ class Login {
         $this->db=$database;
     }     
 
-    public function bestaatAl($gebruikersnaam){
+    public function gebruikerBestaatAl($gebruikersnaam){
         $query=$this->db->prepare(
             "SELECT COUNT(*) FROM accounts WHERE gebruikersnaam = ?"
         );
@@ -48,15 +48,30 @@ class Login {
         }
     }
 
-    public function aanmelden($gebruikersnaam, $wachtwoord, $email, $dlm) {
+    public function aanmelden($gebruikersnaam, $wachtwoord, $email) {
         $query = $this->db->prepare(
-            "INSERT INTO accounts (gebruikersnaam, ww, mail, dlm) VALUES (?,?,?,?)"
+            "INSERT INTO accounts (gebruikersnaam, ww, mail) VALUES (?,?,?)"
         );
 
         $query->bindValue(1,$gebruikersnaam);
         $query->bindValue(2,$wachtwoord);
         $query->bindValue(3,$email);
-        $query->bindValue(4,$dlm);
+		
+        try{
+            $query->execute();
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }    
+    }
+	
+	public function insert($wachtwoord, $email, $gebruikersnaam) {
+        $query = $this->db->prepare(
+            "UPDATE accounts SET mail=?, ww=? WHERE gebruikersnaam=?; "
+        );
+
+        $query->bindValue(1,$email);
+        $query->bindValue(2,$wachtwoord);
+        $query->bindValue(3,$gebruikersnaam);
 
         try{
             $query->execute();
