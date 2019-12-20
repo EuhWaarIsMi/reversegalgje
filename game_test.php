@@ -11,21 +11,22 @@
 <head>
 <meta charset="utf-8">
 <title>test input</title>
-	<?php
-		KansBerekening($sessie, $kansSessie, $db);
-		KiesVraag($sessie, $kansSessie, $db);
-		Stelvraag($vraag);
-	?>
 </head>
 
 <body>
 	<?php
+		if(isset($_GET['vraag'])) {
+			$vorigeVraag = $_GET['vraag'];
+			echo $vorigeVraag;
+		}
+
 		// hier komt vraag functie te staan
-		echo "<h1>$vraagVolledig</h1>";
+		KansBerekening($sessie, $kansSessie, $db);
+		KiesVraag($sessie, $kansSessie, $db);
 		
 
 		if(isset($_GET['antwoord'])) {
-			StreepVragenWeg($db, $_GET['antwoord'], $vraag, $sessie);
+			StreepVragenWeg($db, $_GET['antwoord'], $vorigeVraag, $sessie);
 			$beurten--;
 		}
 
@@ -34,10 +35,15 @@
 			$beurten++;
 		}
 		echo $beurten;
+
+
+		Stelvraag($vraag);
+		echo "<h1>$vraagVolledig</h1>";
 	?>
 
 	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
 		<input type="hidden" name="beurten" value="<?php echo $beurten ?>"></input>
+		<input type="hidden" name="vraag" value="<?php echo $vraag ?>"></input>
 		<input type="submit" name="antwoord" value="ja"></input>
 		<input type="submit" name="antwoord" value="nee"></input>
 		<input type="submit" name="zetTerug" value="ga een zet terug"></input>
