@@ -4,7 +4,6 @@
 	if(isset($_GET['beurten'])) {
 		$beurten = $_GET['beurten']; 
 	}
-	//$beurten = $_GET['beurten'];
 ?>
 <!doctype html>
 <html>
@@ -15,29 +14,33 @@
 
 <body>
 	<?php
+		
 		if(isset($_GET['vraag'])) {
 			$vorigeVraag = $_GET['vraag'];
-			echo $vorigeVraag;
 		}
-
+		else{
+			$vorigeVraag = NULL;
+		}
 		// hier komt vraag functie te staan
-		KansBerekening($sessie, $kansSessie, $db);
-		KiesVraag($sessie, $kansSessie, $db);
-		
-
 		if(isset($_GET['antwoord'])) {
 			StreepVragenWeg($db, $_GET['antwoord'], $vorigeVraag, $sessie);
 			$beurten--;
 		}
 
-		if(isset($_GET['zetTerug'])) {
+		/*if(isset($_GET['zetTerug'])) {
 			echo $_GET['zetTerug'];
 			$beurten++;
+		}*/ 
+
+		KansBerekening($sessie, $kansSessie, $db);
+		KiesVraag($sessie, $kansSessie, $db, $beurten);
+		if(isset($vraag)){	
+			Stelvraag($vraag);
 		}
-		echo $beurten;
 
-
-		Stelvraag($vraag);
+		if ($beurten == 0 || ((is_numeric(substr($vorigeVraag, 1, 1)) == False && strlen($vorigeVraag) > 1) && $_GET['antwoord'] == 'ja') || isset($vraag) == False ) {
+			header('location:spelResultaat.php?antwoord='. $_GET['antwoord']."&woord='". $vorigeVraag. "'");
+		}
 		echo "<h1>$vraagVolledig</h1>";
 	?>
 
@@ -46,7 +49,9 @@
 		<input type="hidden" name="vraag" value="<?php echo $vraag ?>"></input>
 		<input type="submit" name="antwoord" value="ja"></input>
 		<input type="submit" name="antwoord" value="nee"></input>
-		<input type="submit" name="zetTerug" value="ga een zet terug"></input>
+		<!-- <input type="submit" name="zetTerug" value="ga een zet terug"></input> -->
 	</form>
+
+	<p>beurten: <?php echo $beurten; ?></p>
 </body>
 </html>

@@ -27,23 +27,19 @@
 		$db->query($sql);
 		$db->commit();	//De 'verzameling'queries wordt uitgevoerd
 	}
-
 	function KiesVraag($sessie, $kansSessie, $db, $beurten){	//deze functie kiest van de percentages een vraag uit
 		$minPerc = 50;	//minimale en maximale percentage waar de vraag tussen moet zitten
 		$maxPerc = 50;
-
 		$sql = "SELECT COUNT(*) FROM ". $sessie." WHERE weg = 'False'";	//telt hoeveel woorden nog meedoen
 		$woordenArray = $db->query($sql);
 		foreach ($woordenArray as $row) {	//het resultaat van de query is een multidimentionale array, maar we hebben maar één getal nodig.
 											//er wordt door $woordenArray geloopt en elke loop wordt de volgende waarde gepakt. Dit gebeurt hier maar één keer.
 			$aantalWoorden = $row[0];		//$woordenArray is een multimentionale array, dus is $aantalWoorden ook een array dus moet index 0 worden gebruikt
 		}
-
 		$db->beginTransaction();
 		if ($beurten == 1 || $aantalWoorden <= 2)  {	//als het de laatste beurt is of er twee of minder woorden mee doen, wordt een woord geraden
 			$sql = "SELECT woord FROM woorden WHERE id = (SELECT id FROM ". $sessie. " WHERE weg = 'False' ORDER BY RANDOM() LIMIT 1)";	//selecteert een willekeurig woord voor het geval er twee zijn
 			$vraagArray = $db->query($sql);
-
 			foreach ($vraagArray as $row) {
 				$GLOBALS['vraag'] = $row[0];	//$GLOBALS zorgt ervoor dat ook in de global scope van bv game_test de variabele gebruikt kan worden
 			}
@@ -59,7 +55,6 @@
 				//het werkt nu, alleen nog ff bepalen uit hoeveel hij kan kiezen
 				//aight het werkt nu nog beter
 			} while($aantalInPerc < 2);	//de loop wordt herhaalt
-
 			$sql = "SELECT vraag FROM ". $kansSessie. " WHERE percentage >= ". $minPerc. " AND percentage <=". $maxPerc ." ORDER BY RANDOM() LIMIT 1 ";
 			//kiest een willekeurige vraag die aan de voorwaarden voldoet
 			$vraagArray = $db->query($sql);
@@ -69,7 +64,6 @@
 		}
 		$db->commit();
 	}
-
 	function Stelvraag($vraag){	//maakt van $vraag een vraag in gewone taal die als vraagVolledig in game_test.php wordt gebruikt
 		if (is_numeric($vraag)){	//1,2,3,...
 			$GLOBALS['vraagVolledig'] = "Heeft het woord ".$vraag." letters?";
@@ -84,7 +78,6 @@
 			$GLOBALS['vraagVolledig'] = "Heeft het woord een ".strtoupper($vraag)."?";
 		}
 	}
-
 	function StreepVragenWeg($db, $antwoord, $vraag, $sessie){	//verwerkt het antwoord door wooren weg te strepen
 		if (is_numeric($vraag)){	//1,2,3
 			if ($antwoord == 'ja'){
@@ -112,7 +105,6 @@
 				$db->query($sql);
 			}
 		}
-
 		else {	//a,b,c,...
 			if ($antwoord == 'ja'){
 				$sql = "UPDATE ".$sessie." SET weg = 'True', laatstWeg = 'True' WHERE id NOT IN (SELECT id FROM woorden WHERE woord LIKE '%".$vraag."%')";
