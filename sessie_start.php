@@ -16,6 +16,7 @@ $db->query($sql);
 $sql = "ALTER TABLE ".$sessie." ADD laatstWeg BOOL DEFAULT False";	//voegt de kollom laatstWeg toe en zet alle waardes op false
 $db->query($sql);
 $sql = "CREATE TABLE ".$kansSessie." AS SELECT * FROM vragen";
+$db->query($sql);
 $db->commit();
 header('location:game_test.php?beurten='. $beurten);	//verwijst naar game_test.php en geeft beurten via het url mee
 exit()	//stopt het script
